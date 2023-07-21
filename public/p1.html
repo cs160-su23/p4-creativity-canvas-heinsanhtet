@@ -53,10 +53,20 @@
           button[type="submit"]:active {
             background-color: #4CC9F0;
           }
-          button:hover{
-            transform: rotate(360deg);
-    
+          button[type="feature"]{
+            cursor: pointer;
+            appearance: none;
+            background-color: inherit;
+            margin-left:10px;
+            background-color: none;
+            border: solid black;
+            padding: 20px 20px;
+            border-radius: 75px;
           }
+          button[type="feature"]:active {
+            background-color: #8966B0;
+          }
+
           img{
             width: 70px;
             height: 70px;
@@ -73,10 +83,13 @@
             align-items: flex-start;
             gap: 100px;
           }
+          .imageFeature{
+              justify-content: space-around;
+          }
         </style>
       </head>
       <body>
-        <div class="text">Welcome to ArtisDraw</div>
+        <div class="text">Image</div>
         <div class = "buttonContainer"> 
           <button type="submit">
             <a href="p1.html">
@@ -95,6 +108,19 @@
           </button>
 
         </div>
+        <div class = "imageFeature"> 
+            <button type="feature">
+                <img src="../images/increase.png"  />
+            </button>
+            <button type="feature">
+                <img src="../images/rotate.png"  />
+            </button>
+            <button type="feature">
+                <img src="../images/crop.png"  />
+            </button>
+
+          </div>
+  
       </body>
     </html>
     
