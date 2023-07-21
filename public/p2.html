@@ -21,7 +21,7 @@
 
   <!-- Link to our Paperscript file containing our custom drawing app code, and associate it with the "my-canvas" Canvas Object defined in the HTML layout below-->
   <script type="text/paperscript" src="js/my-drawing-app.js" canvas="my-canvas"></script>
-
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
 
   <body>
@@ -62,7 +62,34 @@
           button[type="feature"]:active {
             background-color: #8966B0;
           }
-
+          button[type="toolbutton"]:active{
+            cursor: crosshair;
+            
+          }
+          #black{
+            background-color: black;
+            width: 50px;
+            height: 50px;
+            border-radius: 25px;
+          }
+          #red{
+            background-color: red;
+            width: 50px;
+            height: 50px;
+            border-radius: 25px;
+          }
+          #green{
+            background-color: green;
+            width: 50px;
+            height: 50px;
+            border-radius: 25px;
+          }
+          #blue{
+            background-color: blue;
+            width: 50px;
+            height: 50px;
+            border-radius: 25px;
+          }
           img{
             width: 70px;
             height: 70px;
@@ -94,10 +121,10 @@
         <div class="text">Drawing</div>
 
         <div class = "toolBar">
-            <button onclick="changeColor('black')">Black</button>
-            <button onclick="changeColor('red')">Red</button>
-            <button onclick="changeColor('blue')">Blue</button>
-            <button onclick="changeColor('green')">Green</button>
+            <button class="toolbutton" id="black" onclick="changeColor('black')"></button>
+            <button class="toolbutton" id="red" onclick="changeColor('red')"></button>
+            <button class="toolbutton" id="blue" onclick="changeColor('blue')"></button>
+            <button class="toolbutton" id="green" onclick="changeColor('green')"></button>
             <br>
             <label>Line Width:</label>
             <input type="range" min="1" max="20" step="1" value="5" oninput="changeLineWidth(this.value)">
