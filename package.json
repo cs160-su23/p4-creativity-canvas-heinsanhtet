@@ -1,5 +1,8 @@
 {
   "dependencies": {
-    "express": "^4.18.2"
+    "cairo": "^0.1.0-alpha.3",
+    "express": "^4.18.2",
+    "pango": "^0.0.3",
+    "paper": "^0.12.17"
   }
 }

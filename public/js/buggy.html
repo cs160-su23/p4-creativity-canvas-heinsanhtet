@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <!-- CSS styles -->
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        font-size: 120%;
+      }
+      .title {
+        border: 3px solid blue;
+        font-size: 200%;
+      }
+      #bluetext {
+        /*  */
+        font-family: verdana;
+        color: lightskyblue;
+      }
+      .center {
+        margin: auto;
+        width: 50%;
+        padding: 10px;
+        text-align: center;
+      }
+    </style>
+
+    <!-- Paper.js library -->
+    <script type="text/javascript" src="paper-full.js"></script>
+  </head>
+
+  <body>
+    <div class="title center blue-text">My Cool Rectangle!</div>
+    <div class="blue-text center">Check it out below.</div>
+    <canvas id="myCanvas" height="1000px" width="1000px"></canvas>
+  </body>
+
+  <script type="text/javascript">
+    // Make the paper scope global
+    paper.install(window);
+    // Wait until HTML is fully loaded
+    window.onload = () => {
+      // Set up the canvas
+      paper.setup("myCanvas");
+
+      // Only three lines below need to be changed to fix all bugs
+
+      var rect = new Rectangle(new Point(100, 100), new Point(300, 300));
+      var path = new Path.Rectangle(rect);
+      path.fillColor = "LightSkyBlue";
+      path.strokeColor = "black";
+      path.strokeWidth = 3;
+
+      var tool = new Tool();
+      var threshold = 10;
+      var resize = false;
+
+      tool.onMouseDown = (event) => {
+        resize = 300 - event.point.x < threshold;
+      };
+
+      tool.onMouseDrag = (event) => {
+        // You may want to read the following reference
+        // http://paperjs.org/reference/path/#segments
+        if (resize) {
+          path.segments[0].point.x = event.point.x;
+          path.segments[2].point.y = event.point.y;
+        }
+      };
+    };
+  </script>
+</html>
