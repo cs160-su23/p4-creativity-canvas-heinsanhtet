@@ -36,36 +36,40 @@
   </head>
 
   <body>
-    <head>
+    <section>
       <style>
         div {
-          display: flex;
           justify-content: left;
           align-items: left;
           margin: 40px;
         }
-        button[type="submit"] {
+        button[class="mode"] {
           cursor: pointer;
           appearance: none;
-          background-color: inherit;
+          background-color: transparent;
           margin-left: 10px;
-          background-color: none;
           border: 3px solid purple;
           padding: 12px 14px;
           border-radius: 25px;
         }
-        button[type="submit"]:active {
+        button[class="mode"]:active {
           background-color: #4cc9f0;
         }
         button[type="feature"] {
+          display: flex;
+          flex-shrink: 1;
+          flex-direction: row;
+          max-width: 150px;
+          min-width: 85px;
+          flex-wrap: wrap;
           cursor: pointer;
           appearance: none;
-          background-color: inherit;
+          background-color: transparent;
           margin-left: 10px;
-          background-color: none;
           border: solid black;
           padding: 20px 20px;
           border-radius: 75px;
+          aspect-ratio: 1/1;
         }
         button[type="feature"]:active {
           background-color: #8966b0;
@@ -75,40 +79,35 @@
         }
         #black {
           background-color: black;
-          width: 50px;
-          height: 50px;
-          border-radius: 25px;
         }
         #red {
           background-color: red;
-          width: 50px;
-          height: 50px;
-          border-radius: 25px;
         }
         #green {
           background-color: green;
-          width: 50px;
-          height: 50px;
-          border-radius: 25px;
         }
         #blue {
           background-color: blue;
-          width: 50px;
-          height: 50px;
-          border-radius: 25px;
         }
         img {
-          width: 70px;
-          height: 70px;
+          display: flex;
+          flex-shrink: 1;
+          max-width: 3.5vw;
+          max-height: 3.5vw;
+          min-width: 40px;
+          min-height: 40px;
         }
         .text {
-          font-size: 60px;
+          display: flex;
+          font-size: 4vw;
+          min-width: 2vw;
           color: #314de4;
           font-family: Arial;
           justify-content: center;
           flex-shrink: 1;
         }
         .buttonContainer {
+          width: 150px;
           display: flex;
           flex-direction: column;
           align-items: flex-start;
@@ -117,10 +116,23 @@
           gap: 100px;
         }
         .drawingFeature {
+          display: flex;
+          flex: 1 1 auto;
           justify-content: space-around;
           flex-shrink: 1;
         }
-
+        .toolbutton {
+          display: flex;
+          flex: 1 1 1vw;
+          justify-content: space-evenly;
+          align-content: stretch;
+          min-width: 30px;
+          max-width: 50px;
+          aspect-ratio: 1/1;
+          border-radius: 50%;
+          cursor: pointer;
+          flex-shrink: 1;
+        }
         .toolBar {
           display: flex;
           flex-direction: row;
@@ -131,20 +143,21 @@
         }
         .toolbuttonContainer {
           display: flex;
+          flex: 1 1 60vw;
           flex-direction: row;
-          flex-wrap: nowrap;
-          justify-content: flex-start;
-          align-items: space-between;
+          flex-wrap: wrap;
+          justify-content: space-evenly;
+          align-items: center;
           flex-shrink: 1;
         }
         .lineWidth {
           display: flex;
+          flex: 1 1 40vw;
           flex-direction: row;
           flex-wrap: nowrap;
           justify-content: space-evenly;
           align-items: center;
-          flex-shrink: 1;
-          padding-inline: 10px;
+          cursor: pointer;
         }
         #my-canvas {
           position: fixed;
@@ -154,87 +167,113 @@
           height: 100vh;
           z-index: -1;
         }
+        #colors {
+          font-family: Arial, Helvetica, sans-serif;
+          font-size: calc(1rem + 1.7vw);
+        }
+        #line {
+          font-family: Arial, Helvetica, sans-serif;
+          font-size: calc(1rem + 1.7vw);
+          margin-inline: 0.5vw;
+        }
+        /* button[type="feature"] {
+          display: flex;
+          flex: 1 1 0.5vw;
+          justify-content: space-around;
+          min-width: 0.5vw;
+          aspect-ratio: 1/1;
+          flex-shrink: 1;
+        } */
+        button[type="feature"] img {
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+        }
+        input[type="range"] {
+          display: flex;
+          flex-shrink: 1;
+          width: 30%;
+        }
       </style>
-    </head>
-    <body>
-      <div class="text">Drawing</div>
+    </section>
+    <div class="text">Drawing</div>
 
-      <div class="toolBar">
-        <div class="toolbuttonContainer">
-          <button
-            class="toolbutton"
-            id="black"
-            onclick="changeColor('black')"
-          ></button>
-          <button
-            class="toolbutton"
-            id="red"
-            onclick="changeColor('red')"
-          ></button>
-          <button
-            class="toolbutton"
-            id="blue"
-            onclick="changeColor('blue')"
-          ></button>
-          <button
-            class="toolbutton"
-            id="green"
-            onclick="changeColor('green')"
-          ></button>
-        </div>
-        <br />
-        <div class="lineWidth">
-          <label>Line Width:</label>
-          <input
-            type="range"
-            min="1"
-            max="20"
-            step="1"
-            value="1"
-            oninput="changeLineWidth(this.value)"
-          />
-        </div>
+    <div class="toolBar">
+      <div class="toolbuttonContainer">
+        <label id="colors">Choose a color! :</label>
+        <button
+          class="toolbutton"
+          id="black"
+          onclick="changeColor('black')"
+        ></button>
+        <button
+          class="toolbutton"
+          id="red"
+          onclick="changeColor('red')"
+        ></button>
+        <button
+          class="toolbutton"
+          id="blue"
+          onclick="changeColor('blue')"
+        ></button>
+        <button
+          class="toolbutton"
+          id="green"
+          onclick="changeColor('green')"
+        ></button>
       </div>
+      <br />
+      <div class="lineWidth">
+        <label id="line">Line Width:</label>
+        <input
+          type="range"
+          min="1"
+          max="20"
+          step="1"
+          value="1"
+          oninput="changeLineWidth(this.value)"
+        />
+      </div>
+    </div>
 
-      <div class="buttonContainer">
-        <button type="submit">
-          <a href="p1.html">
-            <img src="../images/img.png" alt="buttonpng" border="0" />
-          </a>
-        </button>
-        <button type="submit">
-          <a href="p2.html">
-            <img src="../images/pen.png" alt="buttonpng" border="0" />
-          </a>
-        </button>
-        <button type="submit">
-          <a href="p3.html">
-            <img src="../images/magic-wand.png" alt="buttonpng" border="0" />
-          </a>
-        </button>
-      </div>
-      <div class="drawingFeature">
-        <button type="feature">
-          <img src="../images/pencil.png" />
-        </button>
-        <button type="feature">
-          <img src="../images/paint-brush.png" />
-        </button>
-        <button type="feature">
-          <img src="../images/eraser.png" />
-        </button>
-        <button type="feature">
-          <img src="../images/increase.png" />
-        </button>
-        <button type="feature">
-          <img src="../images/rotate.png" />
-        </button>
-        <button type="feature">
-          <img src="../images/crop.png" />
-        </button>
-      </div>
-      <canvas id="my-canvas"></canvas>
-    </body>
+    <div class="buttonContainer">
+      <button class="mode" type="button">
+        <a href="p1.html">
+          <img src="../images/img.png" alt="buttonpng" border="0" />
+        </a>
+      </button>
+      <button class="mode" type="button">
+        <a href="p2.html">
+          <img src="../images/pen.png" alt="buttonpng" border="0" />
+        </a>
+      </button>
+      <button class="mode" type="button">
+        <a href="p3.html">
+          <img src="../images/magic-wand.png" alt="buttonpng" border="0" />
+        </a>
+      </button>
+    </div>
+    <div class="drawingFeature">
+      <button type="feature">
+        <img src="../images/pencil.png" />
+      </button>
+      <button type="feature">
+        <img src="../images/paint-brush.png" />
+      </button>
+      <button type="feature">
+        <img src="../images/eraser.png" />
+      </button>
+      <button type="feature">
+        <img src="../images/increase.png" />
+      </button>
+      <button type="feature">
+        <img src="../images/rotate.png" />
+      </button>
+      <button type="feature">
+        <img src="../images/crop.png" />
+      </button>
+    </div>
+    <canvas id="my-canvas"></canvas>
 
     <script
       src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
