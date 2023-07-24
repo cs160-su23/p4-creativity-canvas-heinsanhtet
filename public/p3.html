@@ -33,6 +33,16 @@
       canvas="my-canvas"
     ></script>
   </head>
+  <!-- /* --------------------------------Sources ----------------------------------------------------------------
+  https://css-tricks.com/almanac/properties/b/border-radius/ various bounding box properties
+  https://css-tricks.com/snippets/css/a-guide-to-flexbox/ all things flexbox
+  https://stackoverflow.com/questions/34398962/how-to-test-html-file-for-mobile-responsiveness moblie responsiveness testing
+  https://getbootstrap.com/docs/5.3/components/button-group/ Bootstrap things I ended up not being able to use but some might be around somewhere
+  https://www.smashingmagazine.com/2019/07/margins-in-css/  Margin information for CSS and flex box to get things to fit
+  https://www.youtube.com/watch?v=Qhaz36TZG5Y&t=10s More CSS stuff that saved my life
+  https://www.youtube.com/watch?v=3elGSZSWTbM&t=373s Flexbox and grid differences and best practices (I used only a few)
+  https://www.youtube.com/watch?v=zhllkjYYUVE&t=1179s trying to figure out what responsiveness looks like successfully implemented, took some of the code
+  https://www.youtube.com/watch?v=SqcY0GlETPk&t=1633s Another video I used for all sorts of things related to coding, building lists and everything else. Learned a ton about react. -->
 
   <body>
     <!DOCTYPE html>
@@ -40,56 +50,100 @@
       <head>
         <style>
           div {
-            display: flex;
             justify-content: left;
             align-items: left;
             margin: 40px;
           }
           button[type="submit"] {
+            display: flex;
             cursor: pointer;
             appearance: none;
-            background-color: inherit;
+            justify-content: center;
+            align-self: center;
+            align-items: center;
+            background-color: transparent;
             margin-left: 10px;
-            background-color: none;
             border: 3px solid purple;
-            padding: 12px 14px;
-            border-radius: 25px;
+            padding: 0.2vw 0.2vh;
+            border-radius: 15%;
+            min-width: 5vw;
+            aspect-ratio: 1/1;
           }
           button[type="submit"]:active {
             background-color: #4cc9f0;
           }
           button[type="feature"] {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            align-self: center;
+            flex-shrink: 0.2;
+            flex-direction: row;
+            max-width: 5vw;
+            min-width: 3vw;
+            flex-wrap: wrap;
             cursor: pointer;
             appearance: none;
-            background-color: inherit;
+            background-color: transparent;
             margin-left: 10px;
-            background-color: none;
             border: solid black;
-            padding: 20px 20px;
-            border-radius: 75px;
+            padding: 0.5vh 0.5vw;
+            margin: 2%;
+            border-radius: 50%;
+            aspect-ratio: 1/1;
           }
           button[type="feature"]:active {
             background-color: #8966b0;
           }
 
-          img {
-            width: 70px;
-            height: 70px;
-          }
+          /* img {
+            max-height: 3.5vw;
+            min-width: 40px;
+            min-height: 40px;
+          } */
           .text {
-            font-size: 60px;
+            display: flex;
+            flex-shrink: 1;
+            font-size: calc(2rem + 2.5vw);
             color: #314de4;
             font-family: Arial;
             justify-content: center;
           }
           .buttonContainer {
+            position: fixed;
+            left: 0;
+            top: 0;
+            bottom: 0;
             display: flex;
             flex-direction: column;
+            justify-content: center;
             align-items: flex-start;
-            gap: 100px;
+            gap: 10vh;
           }
+
           .wandFeature {
+            position: fixed;
+            bottom: 0;
+            padding-bottom: 20px;
+            display: flex;
+            flex-shrink: 1;
+            align-items: center;
             justify-content: space-around;
+            position: absolute;
+            bottom: 0;
+            width: 60vw;
+            margin-left: 20vw;
+            padding-bottom: 20px;
+          }
+          button[type="feature"] img {
+            display: flex;
+            flex-shrink: 1;
+            max-width: 3.5vw;
+          }
+          button[type="submit"] img {
+            display: flex;
+            flex-shrink: 1;
+            max-width: 3.5vw;
           }
         </style>
       </head>
@@ -106,7 +160,7 @@
               <img src="../images/pen.png" alt="buttonpng" border="0" />
             </a>
           </button>
-          <button type="submit">
+          <button type="submit" style="background-color: #4cc9f0">
             <a href="p3.html">
               <img src="../images/magic-wand.png" alt="buttonpng" border="0" />
             </a>
@@ -146,5 +200,19 @@
       crossorigin="anonymous"
     ></script>
     <script type="text/javascript" src="./js/main.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function () {
+        $("button[type='feature']").click(function () {
+          // Check if the clicked button is already purple
+          if ($(this).css("background-color") != "rgb(137, 102, 176)") {
+            // rgb equivalent of #8966b0
+            // Reset all buttons to original color
+            $("button[type='feature']").css("background-color", "transparent");
+            // Set color of the clicked button
+            $(this).css("background-color", "#8966b0");
+          }
+        });
+      });
+    </script>
   </body>
 </html>

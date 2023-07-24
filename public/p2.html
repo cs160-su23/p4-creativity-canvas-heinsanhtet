@@ -35,6 +35,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
   </head>
 
+  <!-- /* --------------------------------Sources ----------------------------------------------------------------
+  https://css-tricks.com/almanac/properties/b/border-radius/ various bounding box properties
+  https://css-tricks.com/snippets/css/a-guide-to-flexbox/ all things flexbox
+  https://stackoverflow.com/questions/34398962/how-to-test-html-file-for-mobile-responsiveness moblie responsiveness testing
+  https://getbootstrap.com/docs/5.3/components/button-group/ Bootstrap things I ended up not being able to use but some might be around somewhere
+  https://www.smashingmagazine.com/2019/07/margins-in-css/  Margin information for CSS and flex box to get things to fit
+  https://www.youtube.com/watch?v=Qhaz36TZG5Y&t=10s More CSS stuff that saved my life
+  https://www.youtube.com/watch?v=3elGSZSWTbM&t=373s Flexbox and grid differences and best practices (I used only a few)
+  https://www.youtube.com/watch?v=zhllkjYYUVE&t=1179s trying to figure out what responsiveness looks like successfully implemented, took some of the code
+  https://www.youtube.com/watch?v=SqcY0GlETPk&t=1633s Another video I used for all sorts of things related to coding, building lists and everything else. Learned a ton about react. -->
+
   <body>
     <section>
       <style>
@@ -44,32 +55,40 @@
           margin: 40px;
         }
         button[class="mode"] {
+          display: flex;
+          flex-direction: column;
+          flex-shrink: 1;
+          justify-content: center;
+          align-items: center;
           cursor: pointer;
           appearance: none;
+          min-width: 5vw;
+          aspect-ratio: 1/1;
           background-color: transparent;
           margin-left: 10px;
           border: 3px solid purple;
-          padding: 12px 14px;
-          border-radius: 25px;
+          border-radius: 15%;
+          padding: 0.2vw 0.2vh;
         }
         button[class="mode"]:active {
           background-color: #4cc9f0;
         }
         button[type="feature"] {
           display: flex;
-          flex-shrink: 1;
+          justify-content: center;
+          align-items: center;
+          flex-shrink: 0.2;
           flex-direction: row;
-          max-width: 150px;
-          min-width: 85px;
+          max-width: 3vw;
+          min-width: 2vw;
           flex-wrap: wrap;
           cursor: pointer;
-          appearance: none;
           background-color: transparent;
-          margin-left: 10px;
+          margin-left: 2%;
           border: solid black;
-          padding: 20px 20px;
-          border-radius: 75px;
+          border-radius: 50%;
           aspect-ratio: 1/1;
+          padding: 0.2vh 0.5vw;
         }
         button[type="feature"]:active {
           background-color: #8966b0;
@@ -94,8 +113,13 @@
           flex-shrink: 1;
           max-width: 3.5vw;
           max-height: 3.5vw;
-          min-width: 40px;
-          min-height: 40px;
+          min-width: 1vw;
+          min-height: 1vh;
+          justify-content: center;
+          align-self: center;
+          /* padding: 3% 3%; */
+          /* margin: 15%; */
+          aspect-ratio: 1/1;
         }
         .text {
           display: flex;
@@ -116,6 +140,11 @@
           gap: 100px;
         }
         .drawingFeature {
+          position: fixed;
+          bottom: 0;
+          width: 60vw;
+          margin-left: 20vw;
+          padding-bottom: 20px;
           display: flex;
           flex: 1 1 auto;
           justify-content: space-around;
@@ -138,14 +167,13 @@
           flex-direction: row;
           flex-wrap: nowrap;
           justify-content: space-evenly;
-          align-items: stretch;
+          align-items: center;
           flex-shrink: 1;
         }
         .toolbuttonContainer {
           display: flex;
           flex: 1 1 60vw;
           flex-direction: row;
-          flex-wrap: wrap;
           justify-content: space-evenly;
           align-items: center;
           flex-shrink: 1;
@@ -185,14 +213,20 @@
           flex-shrink: 1;
         } */
         button[type="feature"] img {
-          width: 100%;
-          height: 100%;
-          object-fit: contain;
+          display: flex;
+          flex-shrink: 1;
+          max-width: 3.5vw;
         }
         input[type="range"] {
           display: flex;
           flex-shrink: 1;
           width: 30%;
+        }
+        button[type="mode"] img {
+          display: flex;
+          flex-shrink: 1;
+          max-width: 3.5vw;
+          max-height: 1vh;
         }
       </style>
     </section>
@@ -242,7 +276,7 @@
           <img src="../images/img.png" alt="buttonpng" border="0" />
         </a>
       </button>
-      <button class="mode" type="button">
+      <button class="mode" type="button" style="background-color: #4cc9f0">
         <a href="p2.html">
           <img src="../images/pen.png" alt="buttonpng" border="0" />
         </a>
@@ -291,5 +325,19 @@
       crossorigin="anonymous"
     ></script>
     <script type="text/javascript" src="./js/main.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function () {
+        $("button[type='feature']").click(function () {
+          // Check if the clicked button is already purple
+          if ($(this).css("background-color") != "rgb(137, 102, 176)") {
+            // rgb equivalent of #8966b0
+            // Reset all buttons to original color
+            $("button[type='feature']").css("background-color", "transparent");
+            // Set color of the clicked button
+            $(this).css("background-color", "#8966b0");
+          }
+        });
+      });
+    </script>
   </body>
 </html>
